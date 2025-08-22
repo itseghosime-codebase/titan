@@ -1,10 +1,10 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion, MotionProps, type AnimationProps } from "motion/react";
+import { motion, MotionProps, HTMLMotionProps } from "framer-motion";
 import React from "react";
 
-const animationProps = {
+const animationProps: Partial<HTMLMotionProps<"button">> = {
   initial: { "--x": "100%", scale: 0.8 },
   animate: { "--x": "-100%", scale: 1 },
   whileTap: { scale: 0.95 },
@@ -23,11 +23,11 @@ const animationProps = {
       mass: 0.5,
     },
   },
-} as AnimationProps;
+};
 
 interface ShinyButtonProps
   extends Omit<React.HTMLAttributes<HTMLElement>, keyof MotionProps>,
-  MotionProps {
+    MotionProps {
   children: React.ReactNode;
   className?: string;
 }
@@ -47,7 +47,7 @@ export const ShinyButton = React.forwardRef<
       {...props}
     >
       <span
-        className="relative block size-full text-sm text-[rgb(255,255,255,90%)]"
+        className="relative size-full flex flex-col items-center gap-1.5 w-fit mx-auto text-sm text-[rgb(255,255,255,65%)] dark:font-light dark:text-[rgb(255,255,255,90%)]"
         style={{
           maskImage:
             "linear-gradient(-75deg,var(--primary) calc(var(--x) + 20%),transparent calc(var(--x) + 30%),var(--primary) calc(var(--x) + 100%))",
@@ -57,7 +57,7 @@ export const ShinyButton = React.forwardRef<
       </span>
       <span
         style={{
-          mask: "linear-gradient(rgb(0‰,0,0), rgb(0,0,0)) content-box exclude,linear-gradient(rgb(0,0,0), rgb(0,0,0))",
+          mask: "linear-gradient(rgb(0,0,0), rgb(0,0,0)) content-box exclude,linear-gradient(rgb(0,0,0), rgb(0,0,0))",
           WebkitMask:
             "linear-gradient(rgb(0,0,0), rgb(0,0,0)) content-box exclude,linear-gradient(rgb(0,0,0), rgb(0,0,0))",
           backgroundImage:
